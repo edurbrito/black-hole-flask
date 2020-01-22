@@ -1,0 +1,11 @@
+{
+  "short_name": "App",
+  "name": "My app",
+  "start_url": "/",
+  "background_color": "#2E3D34",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#2E3D34",
+  "orientation": "landscape",
+  "prefer_related_applications":  "false"
+}
