@@ -3,7 +3,7 @@
 #
 #  Contains all the Objects/Classes used in this program
 
-from FlaskWebProject1 import app
+from BlackHole import app
 import random
 import os
 
@@ -105,17 +105,18 @@ class Game(object):
         self.path = path
         self.questions = []
         self.complexityFactor = cF
+        try:
+            folder = os.path.join(app.root_path,self.path)
 
-        folder = self.path
-        for filename in os.listdir(folder):
-            file_path = os.path.join(folder, filename)
-            try:
+            for filename in os.listdir(folder):
+                file_path = os.path.join(folder, filename)
+            
                 if (os.path.isfile(file_path) or os.path.islink(file_path)) and "UsersData" in file_path:
                     os.unlink(file_path)
                 else:
                     raise Exception("No such file or directory 'UsersData'")
-            except Exception as e:
-                print('Failed to delete %s. Reason: %s' % (file_path, e))
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
     
     ## Getters and Setters
     def setDate(self,date):

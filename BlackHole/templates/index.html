@@ -1,33 +1,109 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
+
+{% block heads %}
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+<style>
+    html, body {
+        background: #2E3D34;
+        height: 100%;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .svg-wrapper {
+        height: 60px;
+        margin: 0 auto;
+        position: relative;
+        top: 44%;
+        transform: translateY(-50%);
+        width: 320px;
+    }
+
+    .shape {
+        fill: transparent;
+        stroke-dasharray: 140 540;
+        stroke-dashoffset: -474;
+        stroke-width: 8px;
+        stroke: #68623B;
+    }
+
+    .text {
+        color: #fff;
+        font-family: 'Amatic SC', cursive;
+        font-weight: bold;
+        font-size: 21px;
+        letter-spacing: 8px;
+        line-height: 32px;
+        position: relative;
+        top: -50px;
+        padding: 0;
+        border: none;
+        background: none;
+        outline: none;
+        text-align: center;
+    }
+
+    @keyframes draw {
+        0% {
+            stroke-dasharray: 140 540;
+            stroke-dashoffset: -474;
+            stroke-width: 8px;
+        }
+
+        100% {
+            stroke-dasharray: 760;
+            stroke-dashoffset: 0;
+            stroke-width: 2px;
+        }
+    }
+
+    .svg-wrapper:active .shape {
+        -webkit-animation: 0.2s draw linear forwards;
+        animation: 0.2s draw linear forwards;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-
-<div class="jumbotron">
-    <h1>Flask</h1>
-    <p class="lead">Flask is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<meta http-equiv="refresh" content="3">
+<div class="svg-wrapper">
+    <form action="question" id="start">
+        <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+            <rect class="shape" height="60" width="320" />
+        </svg>
+        <div id="ID" class="text" onclick="document.forms['start'].submit();"></div>
+    </form>
 </div>
+{% endblock %}
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Flask gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://flask.pocoo.org/docs/">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
-    </div>
-</div>
+{% block scripts %}
+<script>
+    //https://code-maven.com/slides/python-programming/flask-login
+    //https://stackoverflow.com/questions/40963401/flask-dynamic-data-update-without-reload-page/40964086
+    $.ajax({
+        url: "/userid",
+        type: "get",
+        data: {},
+        success: function (response) {
+            $("#ID").html(response);
+        },
+        error: function (xhr) {
+            console.log("Failed to give a proper Id")
+        }
+    });
 
+    (function(window, location) {
+        history.replaceState(null, document.title, location.pathname+"#!/history");
+        history.pushState(null, document.title, location.pathname);
+
+        window.addEventListener("popstate", function() {
+          if(location.hash === "#!/history") {
+            history.replaceState(null, document.title, location.pathname);
+            setTimeout(function(){
+              location.replace("/");
+            },0);
+          }
+        }, false);
+        }(window, location));
+</script>
 {% endblock %}
