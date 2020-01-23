@@ -160,22 +160,28 @@ class Game(object):
     ## Loads the questions on a given file
     #  @important File format specification is the following
     #       1 question per line:
-    #       Trunk#branch1#branch2#branch3#branch4   [...]
-    #       where Trunk is the question text and the branches all the options - branch1 matches the correct answer
-    #       Don't worry about the order of the options cause they will be shuffled of every user
+    #       Image$Trunk#branch1#branch2#branch3#branch4   [...]
+    #       where Image is the name of the image file (Empty if none - $ needs to be there anyways) for this question, placed in the static/qres folder as the file, Trunk is the question text and the branches all the options - branch1 matches the correct answer
+    #       Don't worry about the order of the branches/options cause they will be shuffled of every user
     #  @param self The object pointer.
     #  @param path The path where the game file is.
-    def loadQuestions(self,path):
+    def loadQuestions(self,path,filen):
         contents = []
-        with app.open_resource(path,'r') as f:
+        with app.open_resource(path + str(filen),'r') as f:
             contents = f.read()
         
         for l in str(contents).split('\n'):
             Objt = list(l.split('#'))
             branches = dict()
             for i in range(len(Objt[1:])):
-                branches["branch"+str(i+1)] = Objt[i+1]                    
-            q = Question(Objt[0],Objt[1],**branches)
+                branches["branch"+str(i+1)] = Objt[i+1]     
+            imtr =  str(Objt[0]).split('$')
+            image = ''
+            if imtr[0] is not '':
+                image = "static/qres/" + imtr[0]               
+            trunk = imtr[1]
+            q = Question(trunk,Objt[1],**branches)
+            q.image = image
             self.questions.append(q)
 
 ###########################################################################
@@ -198,6 +204,10 @@ class Question(object):
         self.leaf = leaf
         self.setBranches(**kwargs)
         self.image = ""
+
+    ## Getters and Setters
+    def getImage(self):
+        return self.image
     
     ## Getters and Setters
     def getTrunk(self):
@@ -258,4 +268,5 @@ class Question(object):
             if i == self.leaf:
                 opt = k
         print("Leaf: {} | {}".format(self.leaf,opt))
+        print("Image: {}".format(self.image))
         print("###########################")

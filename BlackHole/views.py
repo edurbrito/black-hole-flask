@@ -14,7 +14,7 @@ from BlackHole import app
 from BlackHole.objects import User , Game , Question
 
 game = Game(datetime.now().strftime("%Y-%m-%d at %H:%M"), os.path.join("UsersData/"),111)
-game.loadQuestions(os.path.join("games/game1"))
+game.loadQuestions(os.path.join("games/"),"game1")
 
 def userActive():
     return 'user' in session
@@ -84,7 +84,7 @@ def question():
     q = game.questions[user.qindexs[c]]
     b = q.shuffleBranches()          
 
-    return render_template('question.html', nq = nqt , trunk = q.getTrunk() , branches = b , leaf = q.getLeaf() , image = "" , alt = c )
+    return render_template('question.html', nq = nqt , trunk = q.getTrunk() , branches = b , leaf = q.getLeaf() , image = q.getImage() , alt = c )
 
 
 ##############################################################################################
