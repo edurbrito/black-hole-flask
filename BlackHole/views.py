@@ -7,6 +7,7 @@ import time
 import urllib.request
 import json
 import os
+import random
 from datetime import datetime
 
 from flask import render_template, session , request , redirect , send_from_directory
@@ -44,8 +45,12 @@ def home():
 def getUserId():
     if 'user' not in session:
         while True:
-            suggestion = str(json.loads(urllib.request.urlopen("https://api.namefake.com/").read().decode('utf-8'))['name']).split(' ', 1)[0]
-            
+            suggestion = ""
+            try:
+                suggestion = str(json.loads(urllib.request.urlopen("https://api.namefake.com/").read().decode('utf-8'))['name']).split(' ', 1)[0]
+            except:
+                suggestion = game.fnames[random.randint(0,len(game.fnames)-1)]
+
             if '.' not in suggestion and "Prof" not in suggestion:
                 user = User(suggestion,len(game.getQuestions()))
 

@@ -93,6 +93,8 @@ class User(object):
 #            @var questions        List of game questions.
 #            @var complexityFactor Factor used in points calculation. 
 class Game(object):
+    
+    fnames = ['Willard', 'Albert', 'Helene', 'Leopold', 'Cathy', 'Orpha', 'Helena', 'Lance', 'Miles', 'Lilian', 'Haley', 'Allen', 'Willa', 'Torey', 'Krista', 'Dorian', 'Carlie', 'Bernadine', 'Albin', 'Vernie', 'Zachery', 'Marcia', 'Savion', 'Augustine', 'Serena', 'Edwina', 'Monique', 'Adrien', 'Janie', 'Jolie', 'Melisa', 'Hillard', 'Cali', 'Herminia', 'Luella', 'Armand', 'Monty', 'Carson', 'Albertha', 'Maurice', 'Lazaro', 'Maye', 'Candice', 'Elwyn', 'Kelli', 'Garland', 'Clint', 'Freeda', 'Keyshawn', 'Jeramie', 'Noah', 'Gerhard', 'Christy', 'Danny', 'Santos', 'Callie', 'Adelbert', 'General', 'Kara', 'Brandi', 'Ellen', 'Jakayla', 'Adeline', 'Eduardo', 'Daron', 'Adah', 'Lysanne', 'Brayan', 'Kaitlin', 'Torrey']
 
     ## The Constructor
     #  @param self The object pointer.
