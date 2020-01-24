@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem Decoded</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+    {% block heads %}{% endblock %}
+    <style>
+        body, html {
+            height: 100%;
+            background-color: black;
+            font-family: Georgia, serif;
+          }
+        .bg {
+            /* The image used */
+            background-image: url("/static/cover.png");
+          
+            /* Full height */
+            height: 100%;
+          
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size:cover;
+          }
+
+          .btn:focus, .btn:active:focus, .btn.active:focus{
+            outline:none !important;
+            box-shadow:none !important;
+            border-color: #131313;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--<div class="container body-content"></div>-->
+    {% block content %}{% endblock %}
+    <body>
+        <div class="bg">
+        </div>
+        <h2 style="font-family:serif;position:absolute;top:30%;left: 10%;text-align:left;color:white;background-color:black;padding: 15px;">
+            MENSAGEM
+            <br>
+            DECODED
+            <hr>
+            <button id="clk" type="button" class="btn btn-primary btn-lg" style="border-color: #1b1b1b; border-radius: 2px; background-color:#131313; outline:none;" href="https://github.com/edurbrito/Mensagem_Decoded" >"Todo o vivo é eterno Infante"</button>
+        </h2>
+    </body>
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    <script>
+        $('#clk').click(function(){
+            window.open("https://github.com/edurbrito/Mensagem_Decoded");
+            });
+    </script>
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>
