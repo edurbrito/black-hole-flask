@@ -8,6 +8,9 @@
         text-align: center;
         font-family: 'Amatic SC', cursive;
     }
+    body {
+        padding-top: 50px;
+    }
 </style>
 {% endblock %}
 {% block content %}
@@ -18,7 +21,7 @@
     </div>
     {% for i in range(size) %}
     <div class="container-fluid" style="color: #fff; ">
-        <div class="row align-content-md-center">
+        <div class="row align-content-md-center" {% if users[i].id == thisUser %}style="color:#ffd700;"{% endif %}>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align:left; padding-left:60px; font-size: 30px;">{{ users[i].id }}</div>
             <div class="col-xs-auto col-sm-auto col-md-auto col-lg-auto" style="text-align: right; padding-right: 30px; font-size: 30px;">{{ users[i].points }}</div>
         </div>

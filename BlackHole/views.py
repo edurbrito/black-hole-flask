@@ -206,15 +206,15 @@ def scores():
             for i in range(len(users)):
                 users[i].percentage = users[i].points / users[0].points * 100     
 
-        return render_template('scores.html',size=len(users),users=users,bardata = getStats())
+        return render_template('scores.html',size=len(users),users=users,bardata = getStats(),thisUser=User.dsobject(session['user']).getId())
 
     except Exception as e:
         print("No scores",e)
 
         if "list index out of range" in str(e):
-            return render_template('scores.html',size=len(users),users=users,bardata = {})
+            return render_template('scores.html',size=len(users),users=users,bardata = {},thisUser=User.dsobject(session['user']).getId())
 
-        return render_template('scores.html',size=0,users=None)
+        return render_template('scores.html',size=0,users=None,thisUser=User.dsobject(session['user']).getId())
 
 
 ##############################################################################################
