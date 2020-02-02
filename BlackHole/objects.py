@@ -1,3 +1,5 @@
+# -*- coding: iso-8859-1 -*-
+
 ## @package objects
 #  Documentation for this module.
 #
@@ -173,6 +175,7 @@ class Game(object):
             contents = f.read()
         
         for l in str(contents).split('\n'):
+            l = l.encode('iso-8859-1').decode()
             Objt = list(l.split('#'))
             branches = dict()
             for i in range(len(Objt[1:])):
