@@ -10,6 +10,7 @@ if __name__ == '__main__':
     try:
         raise RuntimeError # comment this line for transmitting on your own network
         app.config['SERVER_NAME'] = "mensagemdecoded.pt"
+        host = '192.168.137.1'
         app.run(host=host,port=80,threaded=True,debug=False) # port 80 means http
     except:
         try:
