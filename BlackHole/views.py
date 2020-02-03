@@ -235,11 +235,12 @@ def review():
     if len(user.answers) >= user.q:
         revQuestions = [None for i in range(len(user.answers))] 
         c = 0
-
+        shuffledBranches = [None for i in range(len(user.answers))]
         for i in user.qindexs:
             revQuestions[i] = revQt(game.questions[i],user.answers[c])
+            shuffledBranches[i] = game.questions[i].shuffleBranches()
             c +=1
 
-        return render_template('review.html', rev = revQuestions, ln = len(revQuestions))
+        return render_template('review.html', rev = revQuestions, ln = len(revQuestions), shfbranches = shuffledBranches)
         
     return redirect("/")

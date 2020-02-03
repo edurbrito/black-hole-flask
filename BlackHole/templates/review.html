@@ -404,7 +404,7 @@
         </div>
     </div>
     <div class="btn-group-vertical btV">
-        {% set branches = rev[i].qt.branches.values() | list %}
+        {% set branches = shfbranches[i] | list %}
         {% set lbr = branches | length %}
         {% for bi in range(lbr) %}
         {% set b = branches[bi] %}
