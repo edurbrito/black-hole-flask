@@ -14,20 +14,27 @@ from flask import render_template, session , request , redirect , send_from_dire
 from BlackHole import app
 from BlackHole.objects import User , Game , Question
 
+## Loading the new Game to be started
 game = Game(datetime.now().strftime("%Y-%m-%d at %H:%M"), os.path.join("UsersData/"),111)
+## Loading the questions for the new Game
 game.loadQuestions(os.path.join("games/"),"game1")
 
+## Checks if User is Active
+#  @return true if active, false if not
 def userActive():
     return 'user' in session
 
 
 #############################################################################################
 
-
+## Favicon Getter
+#  @return favicon.ico
 @app.route('/favicon.ico') 
 def favicon(): 
     return send_from_directory(os.path.join(app.root_path, 'static/images'), 'favicon.ico')
 
+## Manifest Getter
+#  @return manifest.json
 @app.route('/manifest.json')
 def manifest():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'manifest.json')
@@ -35,12 +42,15 @@ def manifest():
 
 ##############################################################################################
 
-
+## Home route
+#  @return index.html
 @app.route('/')
 @app.route('/home')
 def home(): 
     return render_template('index.html',Message='Invalid User')
 
+## UserId route - generates a new random id for the user
+#  @return userid.html
 @app.route('/userid')
 def getUserId():
     if 'user' not in session:
@@ -73,7 +83,8 @@ def getUserId():
 
 ##############################################################################################
 
-
+## Question route - generates a new question on the screen
+#  @return question.html
 @app.route('/question')
 def question():
     if userActive() is not True: 
@@ -94,7 +105,8 @@ def question():
 
 ##############################################################################################
 
-
+## CheckTime route - Mantains User Time checked for calculating forward score
+#  @return checktime.html
 @app.route('/checktime',methods = ['GET'])
 def checkTime():
     if userActive() is not True: 
@@ -109,7 +121,8 @@ def checkTime():
 
 ##############################################################################################
 
-
+## Evaluate route - Evaluates current Question, calculating score based on the correct answer and time checked
+#  @return evaluate.html
 @app.route('/evaluate',methods = ['GET'])
 def evaluate():
     if userActive() is not True: 
@@ -152,7 +165,8 @@ def evaluate():
 
 ##############################################################################################
 
-
+## GetStats - generates stats for the current Game
+#  @return data Stats generated
 def getStats():
     data = {}
     curr_user = User.dsobject(session['user'])
@@ -192,7 +206,8 @@ def getStats():
 
 ##############################################################################################
 
-
+## Scores route - displays Game Global Scores
+#  @return scores.html
 @app.route('/scores')
 def scores():
     if userActive() is not True: 
@@ -219,12 +234,17 @@ def scores():
 
 ##############################################################################################
 
-
+## revQt class representing a reviewed question with the following attributes:
+#        Atributes: 
+#            @var qt               Question.
+#            @var answer           User answer to this Question.
 class revQt(object):
     def __init__(self,qt,answer):
         self.qt = qt
         self.answer = answer
 
+## Review route - displays Game User Questions Reviews
+#  @return review.html
 @app.route('/review')
 def review():
     if userActive() is not True: 

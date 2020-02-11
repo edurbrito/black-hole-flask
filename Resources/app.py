@@ -3,11 +3,12 @@ import config as cfg
 app = Flask(__name__)
 app.config.from_object(cfg.Config)
 
+## Home route
+#  @return index.html
 @app.route('/')
 @app.route('/index.html')
 @app.route('/home')
-def index():
-    
+def index():    
     return render_template('index.html')
 
 if __name__ == '__main__': 
