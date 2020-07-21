@@ -1,16 +1,17 @@
+# black-hole-flask
 
-#Black Hole
-<img src="BlackHole\static\images\favicon.png" width="10%">
+A messy flask app for a simple web multiple choice game.
+
 ### Follow this instructions to execute this app:
 ###### only for Windows, because Linux guys don't need guidance for sure!
 ```bash
-git clone ...                       //link to this repo
-cd .../BlackHole                    //path to where you cloned this repo
+git clone https://github.com/edurbrito/black-hole-flask.git 
+cd BlackHole                    
 python -m venv blackenv
 cd blackenv/Scripts
 activate
 
-cd .../BlackHole                    //path to where you cloned this repo
+cd BlackHole                    
 pip install -r requirements.txt
 python runserver.py
 ```
